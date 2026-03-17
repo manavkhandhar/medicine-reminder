@@ -1,9 +1,6 @@
 name: Medicine Reminder Call
 
 on:
-  schedule:
-    - cron: '30 3 * * *'   # 9:00 AM India (IST)
-    - cron: '30 8 * * *'   # 2:00 PM India (IST)
   workflow_dispatch:
 
 jobs:
