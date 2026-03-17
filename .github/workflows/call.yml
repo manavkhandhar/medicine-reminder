@@ -1,0 +1,20 @@
+name: Medicine Reminder Call
+
+on:
+  schedule:
+    - cron: '30 3 * * *'   # 9:00 AM India (IST)
+    - cron: '30 8 * * *'   # 2:00 PM India (IST)
+  workflow_dispatch:
+
+jobs:
+  call:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Make Call via Twilio
+        run: |
+          curl -X POST https://api.twilio.com/2010-04-01/Accounts/${{ secrets.TWILIO_SID }}/Calls.json \
+          --data-urlencode "To=+14379709118" \
+          --data-urlencode "From=+12059474325" \
+          --data-urlencode "Url=https://handler.twilio.com/twiml/EHb1efc7bbb2aa0aaba3fde6dca5a2f5c9" \
+          -u ${{ secrets.TWILIO_SID }}:${{ secrets.TWILIO_AUTH_TOKEN }}
